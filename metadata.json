@@ -1,0 +1,7 @@
+{
+  "name": "HSK Flashcards",
+  "description": "HSK Secondary School Smart Flashcard Vault with spaced repetition for Class 9-10 Physics, Chemistry, and Math in Bengali.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

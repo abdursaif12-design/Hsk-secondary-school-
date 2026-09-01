@@ -1,0 +1,73 @@
+package com.example.ui.theme
+
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+
+private val DarkColorScheme = darkColorScheme(
+    primary = EmeraldLight,
+    onPrimary = Color.Black,
+    primaryContainer = NavyDark,
+    onPrimaryContainer = EmeraldContainer,
+    secondary = AmberLight,
+    onSecondary = Color.Black,
+    secondaryContainer = Color(0xFF374151),
+    onSecondaryContainer = AmberContainer,
+    tertiary = CrimsonLight,
+    onTertiary = Color.White,
+    background = DarkBackground,
+    onBackground = Color(0xFFF3F4F6),
+    surface = DarkSurface,
+    onSurface = Color(0xFFF9FAFB),
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = Color(0xFFD1D5DB)
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = NavyPrimary,
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFFE0E7FF),
+    onPrimaryContainer = NavyDark,
+    secondary = EmeraldAccent,
+    onSecondary = Color.White,
+    secondaryContainer = EmeraldContainer,
+    onSecondaryContainer = Color(0xFF064E3B),
+    tertiary = AmberAccent,
+    onTertiary = Color.White,
+    background = LightBackground,
+    onBackground = Color(0xFF0F172A),
+    surface = LightSurface,
+    onSurface = Color(0xFF0F172A),
+    surfaceVariant = LightSurfaceVariant,
+    onSurfaceVariant = Color(0xFF475569)
+)
+
+@Composable
+fun MyApplicationTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false, // Use our handcrafted branding theme by default
+    content: @Composable () -> Unit,
+) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+
